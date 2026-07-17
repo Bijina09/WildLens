@@ -65,3 +65,13 @@ Results + Confidence Score
 ## 📄 License
 
 This project is for academic purposes — Kantipur City College, Semester VI.
+
+
+## Progress Log
+
+### Stage 1 - v1 (current)
+- ResNet18 transfer learning, binary classification (wildlife vs non_wildlife)
+- Validation accuracy: 99.96%
+- Known issue: Testing on unfamiliar images revealed poor generalization (4/5 real non-wildlife images misclassified as wildlife). Likely caused by a distribution mismatch between wildlife and non_wildlife dataset sources.
+- See stage1_v1_metadata.json for full training details.
+- Next step: Diversify non_wildlife data sources, retrain as v2.
