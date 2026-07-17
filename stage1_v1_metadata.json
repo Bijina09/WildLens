@@ -1,0 +1,24 @@
+{
+  "model_version": "stage1_v1",
+  "architecture": "ResNet18 (transfer learning, ImageNet pretrained)",
+  "task": "Binary classification: wildlife vs non_wildlife",
+  "class_mapping": {
+    "0": "non_wildlife",
+    "1": "wildlife"
+  },
+  "training_data": {
+    "train_wildlife": 5652,
+    "train_non_wildlife": 4062,
+    "val_wildlife": 1416,
+    "val_non_wildlife": 1021,
+    "sources": "Roboflow: 5 species datasets + boar + bird (wildlife), Forest scenery dataset (non_wildlife)"
+  },
+  "results": {
+    "val_accuracy": 0.9996,
+    "note": "High val accuracy but poor generalization - misclassified 4/5 unfamiliar non_wildlife test images as wildlife. Likely dataset distribution mismatch between wildlife and non_wildlife sources."
+  },
+  "known_issues": [
+    "non_wildlife images sourced primarily from one stylistically distinct 'forest scenery' dataset, likely causing the model to learn dataset style rather than general animal presence"
+  ],
+  "next_steps": "Diversify non_wildlife sourcing, retrain as v2"
+}
