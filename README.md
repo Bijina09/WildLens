@@ -75,3 +75,11 @@ This project is for academic purposes — Kantipur City College, Semester VI.
 - Known issue: Testing on unfamiliar images revealed poor generalization (4/5 real non-wildlife images misclassified as wildlife). Likely caused by a distribution mismatch between wildlife and non_wildlife dataset sources.
 - See stage1_v1_metadata.json for full training details.
 - Next step: Diversify non_wildlife data sources, retrain as v2.
+
+
+### Stage 1 - v2
+- Rebuilt non_wildlife data with diverse real camera-trap sources (AMMonitor), corrected mislabeled null images, proper 3-way train/val/test split, early stopping
+- Test accuracy: 99.42% (2221/2234 correct) - honest held-out metric, not just validation
+- External sanity test (10 unfamiliar images): improved from 6/10 (v1) to 8/10 correct; non_wildlife recall improved from 20% to 60%
+- See stage1_v2_metadata.json for full details
+- Still 2/10 misclassified on sanity test - next step is further investigation and diversification for v3

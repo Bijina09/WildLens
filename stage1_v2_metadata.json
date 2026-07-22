@@ -1,0 +1,42 @@
+{
+  "model_version": "stage1_v2",
+  "architecture": "ResNet18 (transfer learning, ImageNet pretrained)",
+  "task": "Binary classification: wildlife vs non_wildlife",
+  "class_mapping": {
+    "0": "non_wildlife",
+    "1": "wildlife"
+  },
+  "training_data": {
+    "train_wildlife": 6069,
+    "train_non_wildlife": 4297,
+    "val_wildlife": 1310,
+    "val_non_wildlife": 921,
+    "test_wildlife": 1312,
+    "test_non_wildlife": 922,
+    "split_ratio": "70/15/15 (train/val/test)",
+    "sources": "Roboflow: 5 species datasets + boar + bird (wildlife, train+valid+test all pooled), Forest scenery dataset + AMMonitor real camera-trap empties (~1000 images) + corrected null-labeled images (non_wildlife)"
+  },
+  "training_details": {
+    "max_epochs": 500,
+    "early_stopping_patience": 15,
+    "epochs_actually_run": 19,
+    "stopped_reason": "Early stopping - no val_loss improvement for 15 epochs"
+  },
+  "results": {
+    "test_accuracy": 0.9942,
+    "test_loss": 0.0202,
+    "test_correct": "2221/2234",
+    "external_sanity_test": "8/10 correct on unfamiliar images (up from 6/10 in v1); non_wildlife recall improved from 20% to 60%"
+  },
+  "improvements_over_v1": [
+    "Diversified non_wildlife sources beyond single Forest dataset (added real camera-trap blanks from AMMonitor)",
+    "Corrected mislabeled null/blank images that were sitting in wildlife class (elephant, boar, bird)",
+    "Included Roboflow valid+test splits, not just train, for more total data",
+    "Proper 3-way train/val/test split instead of train/val only, giving an honest held-out test metric",
+    "Added early stopping to avoid unnecessary training / overfitting risk"
+  ],
+  "known_issues": [
+    "Still misclassifies 2/10 external sanity images (both non_wildlife predicted as wildlife) - further investigation needed into what visual pattern is driving this"
+  ],
+  "next_steps": "Investigate remaining misclassified images, consider further non_wildlife diversification (e.g. more geographic/lighting variety) for v3"
+}
