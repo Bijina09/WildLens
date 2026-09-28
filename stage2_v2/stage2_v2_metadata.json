@@ -1,0 +1,67 @@
+{
+  "model_version": "stage2_v2",
+  "architecture": "Ultralytics YOLO (medium)",
+  "task": "Object detection / wildlife species identification",
+  "classes": [
+    "Bengal_Tiger",
+    "rhino",
+    "red-panda",
+    "snow leopard",
+    "elephant"
+  ],
+  "validation": {
+    "images": 656,
+    "instances": 852,
+    "precision": 0.96,
+    "recall": 0.936,
+    "mAP50": 0.965,
+    "mAP50_95": 0.774
+  },
+  "per_class": {
+    "Bengal_Tiger": {
+      "images": 205,
+      "instances": 262,
+      "precision": 0.949,
+      "recall": 0.874,
+      "mAP50": 0.936,
+      "mAP50_95": 0.634
+    },
+    "rhino": {
+      "images": 200,
+      "instances": 238,
+      "precision": 0.968,
+      "recall": 0.979,
+      "mAP50": 0.981,
+      "mAP50_95": 0.93
+    },
+    "red-panda": {
+      "images": 76,
+      "instances": 86,
+      "precision": 0.952,
+      "recall": 0.921,
+      "mAP50": 0.947,
+      "mAP50_95": 0.702
+    },
+    "snow leopard": {
+      "images": 78,
+      "instances": 87,
+      "precision": 0.977,
+      "recall": 0.989,
+      "mAP50": 0.985,
+      "mAP50_95": 0.81
+    },
+    "elephant": {
+      "images": 97,
+      "instances": 179,
+      "precision": 0.954,
+      "recall": 0.919,
+      "mAP50": 0.977,
+      "mAP50_95": 0.795
+    }
+  },
+  "unseen_test": {
+    "images": 30,
+    "images_per_class": 6,
+    "note": "Preliminary generalization check; formal strongest-detection accuracy not recomputed yet."
+  }
+}
