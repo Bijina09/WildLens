@@ -1,0 +1,72 @@
+{
+  "model_version": "stage2_v3",
+  "architecture": "Ultralytics YOLO (medium)",
+  "task": "Object detection / wildlife species identification",
+  "classes": [
+    "Bengal_Tiger",
+    "rhino",
+    "red-panda",
+    "snow leopard",
+    "elephant"
+  ],
+  "changes_from_v2": "Replaced all-thermal rhino training data (v2) with RGB rhino images sourced from iNaturalist Nepal research-grade observations, split by observer to prevent leakage",
+  "test_split": {
+    "images": 422,
+    "instances": 578,
+    "precision": 0.935,
+    "recall": 0.902,
+    "mAP50": 0.954,
+    "mAP50_95": 0.723
+  },
+  "per_class_test": {
+    "Bengal_Tiger": {
+      "images": 205,
+      "instances": 262,
+      "precision": 0.954,
+      "recall": 0.847,
+      "mAP50": 0.921,
+      "mAP50_95": 0.624
+    },
+    "rhino": {
+      "images": 30,
+      "instances": 37,
+      "precision": 0.909,
+      "recall": 0.892,
+      "mAP50": 0.948,
+      "mAP50_95": 0.802
+    },
+    "red-panda": {
+      "images": 76,
+      "instances": 86,
+      "precision": 0.914,
+      "recall": 0.87,
+      "mAP50": 0.933,
+      "mAP50_95": 0.717
+    },
+    "snow leopard": {
+      "images": 14,
+      "instances": 14,
+      "precision": 0.922,
+      "recall": 1.0,
+      "mAP50": 0.99,
+      "mAP50_95": 0.686
+    },
+    "elephant": {
+      "images": 97,
+      "instances": 179,
+      "precision": 0.976,
+      "recall": 0.9,
+      "mAP50": 0.977,
+      "mAP50_95": 0.786
+    }
+  },
+  "unseen_test": {
+    "images": 30,
+    "images_per_class": 6,
+    "rhino_correct": "6/6 (up from 0/6 in v2)",
+    "tiger_correct": "6/6",
+    "snow_leopard_correct": "5/6",
+    "red_panda_correct": "6/6 (one image had an extra false rhino box)",
+    "elephant_correct": "1/6 (contradicts strong test-split score; likely texture confusion with rhino on muddy/wet-skinned elephants \u2014 documented as a known limitation)"
+  }
+}
