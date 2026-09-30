@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Lens | AI Detection</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="user-dashboard.css" />
+    <link rel="stylesheet" href="pages.css" />
+  </head>
+  <body
+    data-page="detect"
+    data-title="AI Detection"
+    data-sub="Upload a camera-trap image to identify wildlife."
+  >
+    <div class="dashboard-container">
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="main">
+        <header class="topbar" id="topbar"></header>
+
+        <section class="scanner-section">
+          <div class="section-title">
+            <h2><i class="fa-solid fa-camera-retro"></i>Wildlife AI Scanner</h2>
+            <p>Upload an image captured from camera or device.</p>
+          </div>
+          <div class="scanner-grid">
+            <div class="upload-area" id="uploadArea">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <h3>Upload Wildlife Image</h3>
+              <p>Drag &amp; drop or browse image</p>
+              <label class="browse-btn"
+                >Choose Image<input
+                  type="file"
+                  id="imageInput"
+                  accept="image/*"
+                  multiple
+                  hidden
+              /></label>
+            </div>
+            <div class="preview-area">
+              <img id="previewImage" src="" alt="Preview" />
+              <div id="previewText">
+                <i class="fa-regular fa-image"></i>
+                <p>Image Preview</p>
+              </div>
+            </div>
+          </div>
+          <div class="scan-buttons">
+            <button id="detectBtn" disabled>
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Start Detection
+            </button>
+            <button id="removeBtn">
+              <i class="fa-solid fa-trash"></i> Remove
+            </button>
+          </div>
+        </section>
+
+        <section class="result-section" id="resultSection">
+          <div class="section-title">
+            <h2><i class="fa-solid fa-paw"></i>Detection Result</h2>
+          </div>
+          <div class="result-card">
+            <div class="animal-image">
+              <img id="resultImage" src="" alt="" />
+            </div>
+            <div class="result-details">
+              <h2 id="speciesName">No Detection Yet</h2>
+              <div class="confidence">
+                <span>Confidence</span><strong id="confidence">0%</strong>
+              </div>
+              <div class="progress"><div id="confidenceBar"></div></div>
+              <p>
+                <i class="fa-solid fa-calendar"></i
+                ><span id="detectDate">-</span>
+              </p>
+              <p id="resultNote"></p>
+            </div>
+          </div>
+          <div id="batchResults"></div>
+        </section>
+
+        <footer>🌿 Wild Lens | AI Powered Wildlife Monitoring System</footer>
+      </main>
+    </div>
+    <script src="toast.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

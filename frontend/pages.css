@@ -1,0 +1,55 @@
+/* Extra styles for the multi-page layout. Load AFTER user-dashboard.css */
+
+/* sidebar links: whole row clickable */
+.sidebar li { padding: 0; }
+.sidebar li a {
+  display: flex; align-items: center; gap: 15px;
+  padding: 15px; width: 100%;
+  color: inherit; text-decoration: none;
+}
+.sidebar li a i { font-size: 19px; width: 25px; }
+
+/* initials avatar (replaces random pravatar photos) */
+.avatar {
+  width: 55px; height: 55px; border-radius: 50%;
+  border: 3px solid #37ff8b; background: #0f2a1c; color: #37ff8b;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 20px; flex-shrink: 0;
+}
+.avatar.lg { width: 120px; height: 120px; border-width: 4px; font-size: 44px; }
+
+/* generic section card used by pages without their own wrapper */
+.page-section {
+  background: rgba(255,255,255,.08); backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 25px;
+  padding: 35px; margin-bottom: 35px;
+}
+.section-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; gap: 15px; flex-wrap: wrap; }
+.section-head .section-title { margin-bottom: 0; }
+.view-all { color: #37ff8b; text-decoration: none; font-weight: 600; }
+.view-all:hover { text-decoration: underline; }
+
+/* history filter */
+.filter-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.filter-bar select {
+  padding: 10px 16px; border-radius: 20px; border: 1px solid rgba(255,255,255,.2);
+  background: rgba(0,0,0,.35); color: #fff; font-family: inherit;
+}
+.empty-note { color: #aaa; }
+
+/* species breakdown bars */
+.breakdown-row { display: flex; align-items: center; gap: 15px; margin: 14px 0; }
+.breakdown-row .b-name { width: 190px; }
+.breakdown-row .b-bar { flex: 1; height: 12px; background: rgba(255,255,255,.1); border-radius: 10px; overflow: hidden; }
+.breakdown-row .b-fill { height: 100%; background: #37ff8b; border-radius: 10px; width: 0; transition: width .5s; }
+.breakdown-row .b-count { width: 30px; text-align: right; font-weight: 700; }
+
+/* species status badge */
+.status-badge { display: inline-block; margin-top: 12px; padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; }
+.status-badge.endangered { background: #ff5757; color: #fff; }
+.status-badge.vulnerable { background: #ffb347; color: #2a1a00; }
+
+/* profile page */
+.profile-card .role-tag { padding: 8px 20px; border-radius: 20px; background: #37ff8b; color: #06150d; font-weight: 700; }
+
+.drag-over { border-color: #37ff8b !important; background: rgba(55,255,139,.1) !important; }

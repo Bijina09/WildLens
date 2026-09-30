@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Wild Lens | Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="admin-dashboard.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- ================= SIDEBAR ================= -->
+
+      <aside class="sidebar">
+        <div class="logo">
+          <h2>Wild<span>Lens</span></h2>
+
+          <p>Administrator Panel</p>
+        </div>
+
+        <ul>
+          <li class="menu active" data-page="dashboard">
+            <i class="fa-solid fa-table-columns"></i>
+
+            <span>Dashboard</span>
+          </li>
+
+          <li class="menu" data-page="users">
+            <i class="fa-solid fa-users"></i>
+
+            <span>Users</span>
+          </li>
+
+          <li class="menu" data-page="detections">
+            <i class="fa-solid fa-camera"></i>
+
+            <span>Detections</span>
+          </li>
+
+          <li class="menu" data-page="species">
+            <i class="fa-solid fa-paw"></i>
+
+            <span>Species</span>
+          </li>
+
+          <li class="menu" data-page="training">
+            <i class="fa-solid fa-clipboard-check"></i
+            ><span>Training Data</span>
+          </li>
+          <li class="menu" data-page="models">
+            <i class="fa-solid fa-layer-group"></i><span>Models</span>
+          </li>
+
+          <li onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Logout</span>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- ================= MAIN ================= -->
+
+      <main class="main">
+        <!-- ================= TOPBAR ================= -->
+
+        <div class="topbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              type="text"
+              placeholder="Search users, species or reports..."
+            />
+          </div>
+
+          <div class="top-right">
+            <i class="fa-regular fa-bell"></i>
+
+            <i class="fa-regular fa-envelope"></i>
+
+            <div class="profile">
+              <img src="https://i.pravatar.cc/100?img=12" />
+
+              <div>
+                <h4 id="adminName">Administrator</h4>
+
+                <p>Wild Lens Admin</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= PAGE TITLE ================= -->
+
+        <div class="page-title">
+          <div>
+            <h1 id="pageHeading">Dashboard</h1>
+
+            <p>
+              Welcome back,
+
+              <b id="welcomeAdmin"> Admin </b>
+
+              👋
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= DASHBOARD PAGE ================= -->
+
+        <section id="dashboard" class="page active-page">
+          <div class="cards">
+            <div class="card">
+              <div>
+                <h2 id="totalUsers">0</h2>
+                <p>Registered Users</p>
+              </div>
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="card">
+              <div>
+                <h2 id="totalPredictions">0</h2>
+                <p>Total Detections</p>
+              </div>
+              <i class="fa-solid fa-camera"></i>
+            </div>
+            <div class="card">
+              <div>
+                <h2 id="wildlifeCount">0</h2>
+                <p>Species Identified</p>
+              </div>
+              <i class="fa-solid fa-paw"></i>
+            </div>
+            <div class="card">
+              <div>
+                <h2 id="avgMs">0</h2>
+                <p>Avg. Processing Time</p>
+              </div>
+              <i class="fa-solid fa-gauge-high"></i>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <!-- ================= USERS TABLE ================= -->
+
+            <div class="table-card">
+              <div class="table-header">
+                <div>
+                  <h2>Registered Users</h2>
+
+                  <p>Manage all users registered in Wild Lens.</p>
+                </div>
+              </div>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Scans</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+
+                <tbody id="userTable">
+                  <!-- JavaScript will load users -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ================= RIGHT SIDE ================= -->
+
+            <div class="right-panel">
+              <div class="glass-card">
+                <div class="card-title">
+                  <h3><i class="fa-solid fa-camera"></i> Recent Detections</h3>
+                </div>
+                <div id="recentDetections"><p class="muted">Loading...</p></div>
+              </div>
+
+              <div class="glass-card">
+                <div class="card-title">
+                  <h3><i class="fa-solid fa-chart-line"></i> Active Model</h3>
+                </div>
+                <div id="systemInfo"><p class="muted">Loading...</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= USERS PAGE ================= -->
+
+        <section id="users" class="page">
+          <h2 class="section-title">Registered Users</h2>
+
+          <div class="users-grid" id="usersGrid">
+            <!-- JavaScript will create user cards here -->
+          </div>
+        </section>
+
+        <!-- ================= DETECTIONS PAGE ================= -->
+
+        <section id="detections" class="page">
+          <h2 class="section-title">Detection Records</h2>
+          <div class="table-card">
+            <div class="table-header">
+              <div>
+                <h2>All Predictions</h2>
+                <p id="detCount">Loading...</p>
+              </div>
+              <select id="detFilter" class="filter-select">
+                <option value="">All results</option>
+                <option value="wildlife">Identified</option>
+                <option value="unidentified">Unidentified</option>
+                <option value="blank">Blank</option>
+              </select>
+            </div>
+            <div class="table-scroll" style="min-height: 420px">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>File</th>
+                    <th>User</th>
+                    <th>Result</th>
+                    <th>Confidence</th>
+                    <th>Model</th>
+                    <th>Date</th>
+                    <th>Training</th>
+                  </tr>
+                </thead>
+                <tbody id="detTable"></tbody>
+              </table>
+            </div>
+            <button
+              id="loadMore"
+              class="add-btn load-more"
+              style="display: none"
+            >
+              Load more
+            </button>
+          </div>
+        </section>
+
+        <!-- ================= SPECIES PAGE ================= -->
+
+        <section id="species" class="page">
+          <h2 class="section-title">Protected Species</h2>
+          <div class="table-card">
+            <div class="table-header">
+              <div>
+                <h2>Identifications by Species</h2>
+                <p>Across all users</p>
+              </div>
+            </div>
+            <div id="speciesBreakdown"></div>
+          </div>
+        </section>
+
+        <section id="training" class="page">
+          <h2 class="section-title">Training Data Review</h2>
+          <div class="table-card">
+            <div class="table-header">
+              <div>
+                <h2>Candidate Images</h2>
+                <p id="trainCount">Loading...</p>
+              </div>
+              <select id="trainFilter" class="filter-select">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="">All</option>
+              </select>
+            </div>
+            <div class="train-grid" id="trainGrid"></div>
+          </div>
+        </section>
+
+        <section id="models" class="page">
+          <h2 class="section-title">Model Management</h2>
+          <div class="table-card" id="currentModel"></div>
+          <div class="table-card" style="margin-top: 25px">
+            <div class="table-header">
+              <div>
+                <h2>Model Versions</h2>
+                <p>Validated versions can be activated or rolled back to.</p>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Version</th>
+                    <th>Status</th>
+                    <th>Dataset</th>
+                    <th>Stage 1 Acc.</th>
+                    <th>mAP50</th>
+                    <th>mAP50-95</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="modelTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="toast.js"></script>
+    <script src="admin-dashboard.js"></script>
+  </body>
+</html>

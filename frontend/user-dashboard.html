@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Lens | Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="user-dashboard.css" />
+    <link rel="stylesheet" href="pages.css" />
+  </head>
+  <body
+    data-page="dashboard"
+    data-title="Welcome back, {name} 👋"
+    data-sub="Monitor wildlife using AI powered detection."
+  >
+    <div class="dashboard-container">
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="main">
+        <header class="topbar" id="topbar"></header>
+
+        <section class="stats">
+          <div class="stat-card">
+            <i class="fa-solid fa-camera"></i>
+            <div>
+              <h2 id="totalScan">0</h2>
+              <p>Total Scans</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-paw"></i>
+            <div>
+              <h2 id="wildlifeCount">0</h2>
+              <p>Wildlife Detected</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-regular fa-image"></i>
+            <div>
+              <h2 id="blankCount">0</h2>
+              <p>Blank Images</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-leaf"></i>
+            <div>
+              <h2 id="speciesCount">0</h2>
+              <p>Species Found</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="page-section">
+          <div class="section-head">
+            <div class="section-title">
+              <h2><i class="fa-solid fa-chart-simple"></i>Species Breakdown</h2>
+              <p>Detections per target species</p>
+            </div>
+            <a class="view-all" href="detect.html">Scan an image &rarr;</a>
+          </div>
+          <div id="speciesBreakdown"></div>
+        </section>
+
+        <section class="page-section">
+          <div class="section-head">
+            <div class="section-title">
+              <h2>
+                <i class="fa-solid fa-clock-rotate-left"></i>Recent Detections
+              </h2>
+              <p>Your latest results</p>
+            </div>
+            <a class="view-all" href="history.html">View all &rarr;</a>
+          </div>
+          <div class="history-grid" id="recentContainer"></div>
+        </section>
+
+        <footer>🌿 Wild Lens | AI Powered Wildlife Monitoring System</footer>
+      </main>
+    </div>
+    <script src="toast.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Lens | History</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="user-dashboard.css" />
+    <link rel="stylesheet" href="pages.css" />
+  </head>
+  <body
+    data-page="history"
+    data-title="Detection History"
+    data-sub="Every image you have analysed."
+  >
+    <div class="dashboard-container">
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="main">
+        <header class="topbar" id="topbar"></header>
+
+        <section class="page-section">
+          <div class="section-head">
+            <div class="filter-bar">
+              <select id="historyFilter">
+                <option value="all">All results</option>
+                <option value="wildlife">Species identified</option>
+                <option value="unidentified">
+                  Wildlife (not a target species)
+                </option>
+                <option value="blank">No wildlife</option>
+              </select>
+              <span id="historyCount" class="empty-note"></span>
+            </div>
+          </div>
+          <div class="history-grid" id="historyContainer"></div>
+        </section>
+
+        <footer>🌿 Wild Lens | AI Powered Wildlife Monitoring System</footer>
+      </main>
+    </div>
+    <script src="toast.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

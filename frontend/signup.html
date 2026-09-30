@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Lens | Sign Up</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.55);
+      }
+
+      .signup-box {
+        position: relative;
+        z-index: 10;
+        width: 450px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(12px);
+        padding: 40px;
+        border-radius: 20px;
+        color: white;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      }
+
+      .signup-box h2 {
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .signup-box p {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ddd;
+      }
+
+      .form-control,
+      .form-select {
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(55, 255, 139, 0.35);
+        color: white;
+      }
+
+      .form-control::placeholder {
+        color: #eee;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: #37ff8b;
+        box-shadow: 0 0 10px rgba(55, 255, 139, 0.45);
+        color: white;
+      }
+
+      .form-select option {
+        background: #0b1d14;
+        color: #37ff8b;
+      }
+
+      .input-group-text {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      .btn-signup {
+        width: 100%;
+        background: #37ff8b;
+        color: #05140c;
+        border: none;
+        padding: 12px;
+        font-size: 18px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+
+      .btn-signup:hover {
+        background: #2de67b;
+        box-shadow: 0 0 20px #37ff8b;
+      }
+
+      .bottom-links {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .bottom-links a {
+        color: #37ff8b;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .bottom-links a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="overlay"></div>
+
+    <div class="signup-box">
+      <h2>🌿 Wild Lens</h2>
+
+      <p>Create Your Account</p>
+
+      <form id="signupForm">
+        <div class="mb-3">
+          <label>Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter Full Name"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label>Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter Email"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label>Password</label>
+
+          <div class="input-group">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Create Password"
+              required
+            />
+
+            <span class="input-group-text" onclick="togglePassword()">
+              <i class="fa-solid fa-eye" id="eye"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label>Confirm Password</label>
+
+          <input
+            type="password"
+            class="form-control"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-signup">Create Account</button>
+      </form>
+
+      <div class="bottom-links">
+        <p class="mt-3">
+          Already have an account?
+
+          <a href="login.html"> Login </a>
+        </p>
+      </div>
+    </div>
+
+    <script src="toast.js"></script>
+    <script>
+      function togglePassword() {
+        let password = document.getElementById("password");
+
+        let eye = document.getElementById("eye");
+
+        if (password.type === "password") {
+          password.type = "text";
+
+          eye.classList.remove("fa-eye");
+
+          eye.classList.add("fa-eye-slash");
+        } else {
+          password.type = "password";
+
+          eye.classList.remove("fa-eye-slash");
+
+          eye.classList.add("fa-eye");
+        }
+      }
+
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const password = document.getElementById("password").value;
+          if (password !== document.getElementById("confirmPassword").value)
+            return showToast("Passwords do not match", "error");
+
+          try {
+            const res = await fetch("/api/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: document.getElementById("name").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                password,
+              }),
+            });
+            const data = await res.json();
+            if (!res.ok) return showToast(data.error, "error");
+            showToast("Registration successful! Redirecting to login...");
+            setTimeout(() => (window.location.href = "login.html"), 1500);
+          } catch {
+            showToast("Cannot reach the server", "error");
+          }
+        });
+    </script>
+  </body>
+</html>

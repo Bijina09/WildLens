@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Lens | Profile</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="user-dashboard.css" />
+    <link rel="stylesheet" href="pages.css" />
+  </head>
+  <body
+    data-page="profile"
+    data-title="My Profile"
+    data-sub="Your account details."
+  >
+    <div class="dashboard-container">
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="main">
+        <header class="topbar" id="topbar"></header>
+
+        <section class="profile-section">
+          <div class="profile-card">
+            <div class="avatar lg" id="profileAvatar">U</div>
+            <div>
+              <h2 id="profileFullName">User Name</h2>
+              <p id="profileEmail">user@email.com</p>
+              <p>Images analysed: <strong id="profileScans">0</strong></p>
+              <span class="role-tag" id="profileRole">User</span>
+            </div>
+          </div>
+        </section>
+
+        <footer>🌿 Wild Lens | AI Powered Wildlife Monitoring System</footer>
+      </main>
+    </div>
+    <script src="toast.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
