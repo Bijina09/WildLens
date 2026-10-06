@@ -234,3 +234,4 @@ photos/
 .env
 .vscode/
 teammate_backend/
+runs/

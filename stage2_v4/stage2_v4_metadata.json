@@ -1,0 +1,91 @@
+{
+  "model_version": "stage2_v4",
+  "architecture": "Ultralytics YOLO (medium)",
+  "task": "Object detection / wildlife species identification",
+  "classes": [
+    "Bengal_Tiger",
+    "rhino",
+    "red-panda",
+    "snow leopard",
+    "elephant"
+  ],
+  "changes_from_v3": "Fixed elephant/rhino confusion caused by a colour shortcut: ~78% of old elephant training images were grayscale (485 of 622) while rhino images were all colour, so v3 labelled 116 of 120 daytime elephant photos as rhino. Grayscale elephants trimmed to 200 (evenly spaced), 120 daytime iNaturalist elephants added (Nepal, research grade, split by observer), and grayscale copies of 40% of rhino training images added.",
+  "test_split": {
+    "images": 442,
+    "instances": 598,
+    "precision": 0.931,
+    "recall": 0.907,
+    "mAP50": 0.952,
+    "mAP50_95": 0.736
+  },
+  "per_class_test": {
+    "Bengal_Tiger": {
+      "images": 205,
+      "instances": 262,
+      "precision": 0.949,
+      "recall": 0.848,
+      "mAP50": 0.929,
+      "mAP50_95": 0.627
+    },
+    "rhino": {
+      "images": 30,
+      "instances": 37,
+      "precision": 0.892,
+      "recall": 0.893,
+      "mAP50": 0.953,
+      "mAP50_95": 0.819
+    },
+    "red-panda": {
+      "images": 76,
+      "instances": 86,
+      "precision": 0.915,
+      "recall": 0.907,
+      "mAP50": 0.935,
+      "mAP50_95": 0.731
+    },
+    "snow leopard": {
+      "images": 14,
+      "instances": 14,
+      "precision": 0.957,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.722
+    },
+    "elephant": {
+      "images": 117,
+      "instances": 199,
+      "precision": 0.941,
+      "recall": 0.884,
+      "mAP50": 0.951,
+      "mAP50_95": 0.78
+    }
+  },
+  "validation_split": {
+    "images": 633,
+    "instances": 870,
+    "precision": 0.974,
+    "recall": 0.9,
+    "mAP50": 0.964,
+    "mAP50_95": 0.739
+  },
+  "daytime_elephant_holdout": {
+    "images": 20,
+    "v3_predicted": "2 elephant, 18 rhino",
+    "v4_predicted": "19 elephant, 1 rhino",
+    "v4_elephant_mAP50": 0.952
+  },
+  "unseen_test": {
+    "images": 30,
+    "images_per_class": 6,
+    "total": "29/30 (v3: 24/30)",
+    "tiger_correct": "6/6",
+    "rhino_correct": "6/6",
+    "red_panda_correct": "6/6",
+    "elephant_correct": "6/6 (v3: 1/6)",
+    "snow_leopard_correct": "5/6 (one rocky-terrain snow leopard called rhino at confidence 0.29)"
+  },
+  "known_limitations": [
+    "Snow leopard on rocky terrain can be misread as rhino at low confidence",
+    "Overlapping animals at dusk can be missed"
+  ]
+}
