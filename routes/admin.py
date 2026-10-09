@@ -169,14 +169,15 @@ def review_training(tid):
         return jsonify(error="Choose the correct species before approving"), 400
 
     db = get_db()
-    cur = db.execute("""UPDATE training_data
-        SET review_status=?, actual_species=?, reviewed_by=?, reviewed_at=CURRENT_TIMESTAMP
-        WHERE training_data_id=?""",
-        (status, label if status == "approved" else None, session["user_id"], tid))
+    cur = db.execute(
+        "UPDATE training_data SET review_status = ?, actual_species = ?, reviewed_by = ?, reviewed_at = CURRENT_TIMESTAMP "
+        "WHERE training_data_id = ? AND review_status = 'pending'",
+        (status, label, session["user_id"], tid),
+    )
     db.commit()
     if cur.rowcount == 0:
-        return jsonify(error="Not found"), 404
-    return jsonify(message="Approved" if status == "approved" else "Rejected")
+        return jsonify({"error": "This image has already been reviewed"}), 409
+    return jsonify(message=f"Marked as {status}")
 
 @admin_bp.get("/api/admin/training/<int:tid>/image")
 @login_required

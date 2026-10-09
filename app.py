@@ -1,14 +1,15 @@
 import os
 import uuid
+import time
 
 from flask import Flask, request, jsonify, send_from_directory, session
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+from PIL import Image
 
 from services.pipeline import run_pipeline
 from database.db import close_db, init_db, DB_PATH
 from routes.auth import auth_bp, login_required
-import time
 from routes.history import history_bp, save_prediction
 from routes.admin import admin_bp
 
@@ -21,9 +22,22 @@ CORS(app)
 
 # these need `app` to exist, so they come after it is created
 app.secret_key = os.environ.get("WILDLENS_SECRET", "dev-only-change-me")
+
+MAX_FILE_MB = 10
+MAX_BATCH = 30
+ALLOWED_EXT = {".jpg", ".jpeg", ".png"}
+# limit for the whole request (a batch of 30 must fit)
+app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024
+
+
+@app.errorhandler(413)
+def too_large(e):
+    return jsonify({"error": "Upload too large"}), 413
+
+
 app.teardown_appcontext(close_db)
 app.register_blueprint(auth_bp)
-app.register_blueprint(history_bp)   
+app.register_blueprint(history_bp)
 app.register_blueprint(admin_bp)
 
 if not os.path.exists(DB_PATH):
@@ -40,7 +54,25 @@ def health():
     return {"project": "Wild Lens AI", "backend": "Running"}
 
 
-MAX_BATCH = 30
+def validate_image(f):
+    ext = os.path.splitext(f.filename or "")[1].lower()
+    if ext not in ALLOWED_EXT:
+        return "Unsupported file type"
+    f.stream.seek(0, os.SEEK_END)
+    size = f.stream.tell()
+    f.stream.seek(0)
+    if size == 0:
+        return "Empty file"
+    if size > MAX_FILE_MB * 1024 * 1024:
+        return f"File exceeds the {MAX_FILE_MB} MB limit"
+    try:
+        Image.open(f.stream).verify()
+    except Exception:
+        return "Corrupted or invalid image"
+    finally:
+        f.stream.seek(0)
+    return None
+
 
 def process_one(image, batch_id=None):
     os.makedirs("uploads", exist_ok=True)
@@ -65,7 +97,11 @@ def process_one(image, batch_id=None):
 def detect():
     if "image" not in request.files:
         return jsonify({"error": "No image uploaded"}), 400
-    return jsonify(process_one(request.files["image"]))
+    img = request.files["image"]
+    err = validate_image(img)
+    if err:
+        return jsonify({"error": err}), 400
+    return jsonify(process_one(img))
 
 
 @app.route("/detect/batch", methods=["POST"])
@@ -80,12 +116,13 @@ def detect_batch():
     batch_id = uuid.uuid4().hex
     results = []
     for f in files:
-        if not f.filename or not (f.mimetype or "").startswith("image/"):
-            results.append({"filename": f.filename or "unknown", "error": "Not an image"})
+        err = validate_image(f)
+        if err:
+            results.append({"filename": f.filename or "unknown", "error": err})
             continue
         try:
             results.append(process_one(f, batch_id))
-        except Exception as e:
+        except Exception:
             app.logger.exception("Batch item failed")
             results.append({"filename": f.filename, "error": "Processing failed"})
 

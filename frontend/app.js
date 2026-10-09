@@ -440,12 +440,17 @@ function initDetect(user) {
         window.location.href = "login.html";
         return;
       }
-      if (!res.ok) throw new Error("Server returned " + res.status);
-      const result = await res.json();
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok)
+        throw new Error(result.error || "Server returned " + res.status);
       showResult(result);
     } catch (err) {
       console.error(err);
-      showToast("Detection failed. Is the Flask server running?", "error");
+      const msg =
+        err instanceof TypeError
+          ? "Cannot reach the server. Is Flask running?"
+          : err.message || "Detection failed";
+      showToast(msg, "error");
       resetDetectBtn();
       detectBtn.disabled = false;
       return;
@@ -467,7 +472,7 @@ function initDetect(user) {
       note = "Identified as one of the five target species.";
     } else if (result.label === "unidentified") {
       species = "Wildlife detected (not a target species)";
-      rawConf = result.confidence;
+      rawConf = result.stage1_confidence ?? result.confidence;
       note =
         "An animal was found, but it was not confidently matched to a target species.";
     } else {
@@ -487,6 +492,14 @@ function initDetect(user) {
     const noteEl = document.getElementById("resultNote");
     if (noteEl) noteEl.textContent = note;
     // no localStorage save: the server stores every prediction
+    const others = (result.detections || [])
+      .slice(1)
+      .map(
+        (d) =>
+          `${speciesDisplayName(d.species)} (${Math.round(d.confidence * 1000) / 10}%)`,
+      );
+    if (noteEl && others.length)
+      noteEl.textContent += " Also detected: " + others.join(", ") + ".";
   }
 
   function describe(r) {
@@ -496,7 +509,10 @@ function initDetect(user) {
       const g = r.top_guess
         ? " (possibly " + speciesDisplayName(r.top_guess) + ")"
         : "";
-      return { text: "Wildlife, low confidence" + g, conf: r.confidence };
+      return {
+        text: "Wildlife, low confidence" + g,
+        conf: r.stage1_confidence ?? r.confidence,
+      };
     }
     return { text: "No wildlife", conf: r.stage1_confidence };
   }

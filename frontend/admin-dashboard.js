@@ -348,21 +348,27 @@ async function loadTraining() {
               : t.review_status === "rejected"
                 ? "inactive"
                 : "pending";
+          const pending = t.review_status === "pending";
           return `
       <div class="train-card" data-id="${t.id}">
         <img src="${t.image}" alt="">
         <div class="train-body">
           <span class="status ${cls}">${t.review_status}</span>
           <p>Model said: <b>${esc(guess)}</b></p>
+          ${pending ? "" : `<p>Final label: <b>${esc(t.actual_species || "-")}</b></p>`}
           <p class="muted">Uploaded by ${esc(t.user_name)}</p>
-          <select class="filter-select train-label">
-            <option value="">Select correct species...</option>
-            ${d.labels.map((l) => `<option ${l === chosen ? "selected" : ""}>${esc(l)}</option>`).join("")}
-          </select>
-          <div class="user-actions">
-            <button class="edit" data-review="approved">Approve</button>
-            <button class="delete" data-review="rejected">Reject</button>
-          </div>
+          ${
+            pending
+              ? `<select class="filter-select train-label">
+                  <option value="">Select correct species...</option>
+                  ${d.labels.map((l) => `<option ${l === chosen ? "selected" : ""}>${esc(l)}</option>`).join("")}
+                </select>
+                <div class="user-actions">
+                  <button class="edit" data-review="approved">Approve</button>
+                  <button class="delete" data-review="rejected">Reject</button>
+                </div>`
+              : `<p class="muted">Reviewed. No further changes allowed.</p>`
+          }
         </div>
       </div>`;
         })
