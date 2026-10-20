@@ -211,6 +211,7 @@ Bijina Khatri, Rinkesh Chaudhary, Shishir Ghimire
 ---
 
 My contribution: model training and evaluation, inference integration.
+
 ---
 
 ## 📄 License
