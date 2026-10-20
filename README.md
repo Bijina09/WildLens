@@ -208,7 +208,9 @@ Bijina Khatri, Rinkesh Chaudhary, Shishir Ghimire
 | ML Engineer | Model training and evaluation, inference integration |
 | Backend Developer | Backend and database |
 | Frontend Developer | UI dashboard and integration |
+---
 
+My contribution: model training and evaluation, inference integration.
 ---
 
 ## 📄 License
