@@ -5,7 +5,15 @@
 WildLens is a browser-based, role-based web application that analyses camera-trap images. A two-stage AI pipeline first filters out blank images (leaves, shadows, wind triggers) and then identifies five Nepal-specific endangered species. Results, history and model versions are stored in a Flask + SQLite backend, with a separate admin area for user management, training-data review and model management.
 
 Semester project, BIT Semester VI, Kantipur City College.
+My contribution: model training and evaluation, inference integration.
 
+---
+
+## 📸 Screenshots
+
+| Detection result | User dashboard | Admin: model management |Admin: training data management |
+|---|---|---|
+| ![Detection result](docs/screenshots/upload_result.png) | ![Dashboard](docs/screenshots/user_dashboard.png) | ![Admin models](docs/screenshots/models.png) | ![Admin training data](docs/screenshots/training_data.png) |
 ---
 
 ## 🎯 Target Species
@@ -227,8 +235,6 @@ Bijina Khatri, Rinkesh Chaudhary, Shishir Ghimire
 | ML Engineer | Model training and evaluation, inference integration |
 | Backend Developer | Backend and database |
 | Frontend Developer | UI dashboard and integration |
-
-My contribution: model training and evaluation, inference integration.
 
 ---
 
