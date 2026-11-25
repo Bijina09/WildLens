@@ -11,9 +11,13 @@ My contribution: model training and evaluation, inference integration.
 
 ## 📸 Screenshots
 
-| Detection result | User dashboard | Admin: model management |Admin: training data management |
-|---|---|---|
-| ![Detection result](docs/screenshots/upload_result.png) | ![Dashboard](docs/screenshots/user_dashboard.png) | ![Admin models](docs/screenshots/models.png) | ![Admin training data](docs/screenshots/training_data.png) |
+| Detection result | User dashboard |
+|---|---|
+| ![Detection result](docs/screenshots/upload_result.png) | ![User dashboard](docs/screenshots/user_dashboard.png) |
+
+| Admin: model management | Admin: training data review |
+|---|---|
+| ![Admin model management](docs/screenshots/models.png) | ![Admin training data review](docs/screenshots/training_data.png) |
 ---
 
 ## 🎯 Target Species
