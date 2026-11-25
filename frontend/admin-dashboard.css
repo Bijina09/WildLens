@@ -230,8 +230,7 @@ TOPBAR
 
   backdrop-filter: blur(12px);
 }
-
-.profile img {
+/* .profile #profileAvatar {
   width: 52px;
 
   height: 52px;
@@ -239,8 +238,23 @@ TOPBAR
   border-radius: 50%;
 
   border: 2px solid #37ff8b;
+  background-color: #035c28;
+  color: black;
+} */
+.profile #profileAvatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 3px solid #37ff8b;
+  background: #0f2a1c;
+  color: #37ff8b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  flex-shrink: 0;
 }
-
 .profile h4 {
   font-size: 16px;
 }

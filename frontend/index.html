@@ -1,242 +1,437 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wild Lens | AI Wildlife Detection</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Lens | AI Wildlife Detection</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Outfit',sans-serif;
-}
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Outfit", sans-serif;
+      }
 
-body{
-overflow:hidden;
-color:#fff;
-}
+      html {
+        scroll-behavior: smooth;
+      }
 
-.hero{
-height:100vh;
-background:
-linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.75)),
-url("https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg");
-background-size:cover;
-background-position:center;
-position:relative;
-}
+      body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        color: #fff;
+        background: #07130d;
+      }
 
-/* NAVBAR */
+      /* HERO SECTION */
+      .hero {
+        min-height: 100vh;
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)),
+          url("https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
 
-nav{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-padding:22px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-backdrop-filter:blur(12px);
-background:rgba(0,0,0,.15);
-}
+      /* NAVBAR */
+      nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 22px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(12px);
+        background: rgba(0, 0, 0, 0.15);
+        z-index: 10;
+      }
 
-.logo{
-font-size:34px;
-font-weight:800;
-letter-spacing:1px;
-}
+      .logo {
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: 1px;
+      }
 
-.logo span{
-color:#37ff8b;
-}
+      .logo span {
+        color: #37ff8b;
+      }
 
-nav ul{
-display:flex;
-list-style:none;
-gap:40px;
-}
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 40px;
+      }
 
-nav ul li a{
-text-decoration:none;
-color:white;
-font-size:17px;
-transition:.3s;
-}
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 17px;
+        transition: 0.3s;
+      }
 
-nav ul li a:hover{
-color:#37ff8b;
-}
+      nav ul li a:hover {
+        color: #37ff8b;
+      }
 
-.login{
-padding:13px 28px;
-background:#37ff8b;
-border-radius:40px;
-color:#05140c;
-text-decoration:none;
-font-weight:700;
-transition:.3s;
-}
+      .login {
+        padding: 13px 28px;
+        background: #37ff8b;
+        border-radius: 40px;
+        color: #05140c;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.3s;
+      }
 
-.login:hover{
-box-shadow:0 0 20px #37ff8b;
-}
+      .login:hover {
+        box-shadow: 0 0 20px #37ff8b;
+      }
 
-/* HERO */
+      /* HERO CONTENT */
+      .content {
+        position: absolute;
+        top: 50%;
+        left: 8%;
+        transform: translateY(-50%);
+        max-width: 650px;
+      }
 
-.content{
-position:absolute;
-top:50%;
-left:8%;
-transform:translateY(-50%);
-max-width:650px;
-}
+      .badge {
+        display: inline-block;
+        padding: 10px 18px;
+        background: rgba(55, 255, 139, 0.15);
+        border: 1px solid rgba(55, 255, 139, 0.4);
+        border-radius: 30px;
+        color: #37ff8b;
+        margin-bottom: 10px;
+        margin-top: 48px;
+      }
 
-.badge{
-display:inline-block;
-padding:10px 18px;
-background:rgba(55,255,139,.15);
-border:1px solid rgba(55,255,139,.4);
-border-radius:30px;
-color:#37ff8b;
-margin-bottom:25px;
-}
+      h1 {
+        font-size: 85px;
+        line-height: 0.95;
+        margin-bottom: 25px;
+        font-weight: 800;
+      }
 
-h1{
-font-size:85px;
-line-height:.95;
-margin-bottom:25px;
-font-weight:800;
-}
+      .green {
+        color: #37ff8b;
+      }
 
-.green{
-color:#37ff8b;
-}
+      p {
+        font-size: 20px;
+        line-height: 1.8;
+        color: #ddd;
+        margin-bottom: 25px;
+      }
 
-p{
-font-size:20px;
-line-height:1.8;
-color:#ddd;
-margin-bottom:40px;
-}
+      .buttons {
+        display: flex;
+        gap: 20px;
+      }
 
-.buttons{
-display:flex;
-gap:20px;
-}
+      .btn {
+        padding: 18px 38px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.3s;
+      }
 
-.btn{
-padding:18px 38px;
-border-radius:50px;
-text-decoration:none;
-font-weight:700;
-transition:.3s;
-}
+      .primary {
+        background: #37ff8b;
+        color: #06150d;
+      }
 
-.primary{
-background:#37ff8b;
-color:#06150d;
-}
+      .primary:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 35px #37ff8b;
+      }
 
-.primary:hover{
-transform:translateY(-5px);
-box-shadow:0 0 35px #37ff8b;
-}
+      .secondary {
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+      }
 
-.secondary{
-border:1px solid rgba(255,255,255,.4);
-color:white;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(10px);
-}
+      .secondary:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
 
-.secondary:hover{
-background:rgba(255,255,255,.12);
-}
+      .scroll {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        letter-spacing: 3px;
+      }
 
-.scroll{
-position:absolute;
-bottom:20px;
-left:50%;
-transform:translateX(-50%);
-font-size:14px;
-letter-spacing:3px;
-}
+      /* INFORMATION SECTIONS */
+      .info-section {
+        min-height: 70vh;
+        padding: 90px 8%;
+        background: #0b1b12;
+        scroll-margin-top: 20px;
+      }
 
-@media(max-width:900px){
+      .info-section:nth-of-type(even) {
+        background: #102319;
+      }
 
-nav ul{
-display:none;
-}
+      .info-section h2 {
+        font-size: 42px;
+        margin-bottom: 18px;
+      }
 
-h1{
-font-size:55px;
-}
+      .info-section h2 span {
+        color: #37ff8b;
+      }
 
-.content{
-left:6%;
-right:6%;
-}
+      .info-section .section-intro {
+        max-width: 850px;
+        font-size: 18px;
+        margin-bottom: 28px;
+      }
 
-.buttons{
-flex-direction:column;
-width:220px;
-}
+      .feature-grid,
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 18px;
+      }
 
-}
-</style>
+      .info-card,
+      .species-card {
+        padding: 24px;
+        border: 1px solid rgba(55, 255, 139, 0.25);
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+      }
 
-</head>
+      .info-card h3,
+      .species-card h3 {
+        color: #37ff8b;
+        margin-bottom: 10px;
+      }
 
-<body>
+      .info-card p,
+      .species-card p {
+        font-size: 16px;
+        margin: 0;
+      }
 
-<section class="hero">
+      .species-icon {
+        font-size: 42px;
+        margin-bottom: 12px;
+      }
 
-<nav>
+      .section-link {
+        display: inline-block;
+        margin-top: 22px;
+        padding: 12px 22px;
+        background: #37ff8b;
+        color: #06150d;
+        text-decoration: none;
+        font-weight: 700;
+        border-radius: 30px;
+      }
 
-<div class="logo">
-Wild <span>Lens</span>
-</div>
+      .section-link:hover {
+        box-shadow: 0 0 18px #37ff8b;
+      }
 
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">Features</a></li>
-<li><a href="#">Gallery</a></li>
-</ul>
+      footer {
+        padding: 24px 8%;
+        text-align: center;
+        color: #bbb;
+        background: #050d08;
+      }
 
-<a href="login.html" class="login">Login</a>
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 900px) {
+        nav ul {
+          display: none;
+        }
 
-</nav>
+        h1 {
+          font-size: 55px;
+        }
 
-<div class="content">
+        .content {
+          left: 6%;
+          right: 6%;
+        }
 
-<div class="badge">
-🤖 AI Powered Wildlife Detection
-</div>
+        .buttons {
+          flex-direction: column;
+          width: 220px;
+        }
 
-<h1>
-Detect.
-<span class="green">Identify.</span>
-Protect.
-</h1>
+        .info-section h2 {
+          font-size: 34px;
+        }
+      }
+    </style>
+  </head>
 
-<p>
-Wild Lens uses Artificial Intelligence and the YOLOv8 object detection model to automatically identify endangered wildlife from camera trap images, helping conservationists monitor forests faster and more accurately.
-</p>
+  <body>
+    <!-- HOME SECTION -->
+    <section class="hero" id="home">
+      <nav>
+        <div class="logo">Wild <span>Lens</span></div>
 
-<div class="buttons">
-<a href="login.html" class="btn primary">Get Started</a>
-<a href="#" class="btn secondary">Explore</a>
-</div>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
 
-</div>
+        <a href="login.html" class="login">Login</a>
+      </nav>
 
-</section>
+      <div class="content">
+        <div class="badge">🤖 AI Powered Wildlife Detection</div>
 
-</body>
+        <h1>
+          Detect.<br />
+          <span class="green">Identify.</span><br />
+          Protect.
+        </h1>
+
+        <p>
+          Wild Lens uses Artificial Intelligence and the YOLOv8 object detection
+          model to identify wildlife from camera-trap images, helping
+          conservationists monitor forests more efficiently.
+        </p>
+
+        <div class="buttons">
+          <a href="login.html" class="btn primary">Get Started</a>
+          <a href="#about" class="btn secondary">Explore</a>
+        </div>
+      </div>
+
+      <div class="scroll">SCROLL TO EXPLORE ↓</div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="info-section" id="about">
+      <h2>About <span>WildLens</span></h2>
+
+      <p class="section-intro">
+        WildLens is a web-based AI system designed to help wildlife researchers
+        review camera-trap images more efficiently. It filters blank or
+        irrelevant images first, then identifies supported wildlife species.
+      </p>
+
+      <p class="section-intro">
+        The goal is to reduce the time spent manually checking large collections
+        of images and make the results easier to review in one place.
+      </p>
+
+      <a class="section-link" href="login.html">Start Analyzing</a>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="info-section" id="features">
+      <h2>System <span>Features</span></h2>
+
+      <p class="section-intro">
+        The main features described in the WildLens project documentation.
+      </p>
+
+      <div class="feature-grid">
+        <article class="info-card">
+          <h3>Two-stage AI</h3>
+          <p>
+            ResNet18 filters blank or irrelevant images, then YOLOv8m detects
+            target wildlife species.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3>Image Upload</h3>
+          <p>
+            Upload a single camera-trap image or a batch of images for analysis.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3>Detection Results</h3>
+          <p>
+            View predicted species and confidence scores for detected animals.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <h3>Analysis History</h3>
+          <p>Review previous image analysis results and records.</p>
+        </article>
+
+        <article class="info-card">
+          <h3>Admin Dashboard</h3>
+          <p>
+            Administrators can manage users, review candidate training images,
+            and view model versions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="info-section" id="gallery">
+      <h2>Target Wildlife <span>Gallery</span></h2>
+
+      <p class="section-intro">
+        WildLens is designed to identify these five target species.
+      </p>
+
+      <div class="gallery-grid">
+        <article class="species-card">
+          <div class="species-icon">🐅</div>
+          <h3>Bengal Tiger</h3>
+          <p>Target species for camera-trap detection.</p>
+        </article>
+
+        <article class="species-card">
+          <div class="species-icon">🦏</div>
+          <h3>One-horned Rhinoceros</h3>
+          <p>Target species for camera-trap detection.</p>
+        </article>
+
+        <article class="species-card">
+          <div class="species-icon">🐆</div>
+          <h3>Snow Leopard</h3>
+          <p>Target species for camera-trap detection.</p>
+        </article>
+
+        <article class="species-card">
+          <div class="species-icon">🐾</div>
+          <h3>Red Panda</h3>
+          <p>Target species for camera-trap detection.</p>
+        </article>
+
+        <article class="species-card">
+          <div class="species-icon">🐘</div>
+          <h3>Asian Elephant</h3>
+          <p>Target species for camera-trap detection.</p>
+        </article>
+      </div>
+
+      <a class="section-link" href="login.html">Try WildLens</a>
+    </section>
+
+    <footer>WildLens AI · Wildlife camera-trap image analysis</footer>
+  </body>
 </html>
